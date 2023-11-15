@@ -1,9 +1,7 @@
-import { EnvService } from './environment';
 
 export const EnvServiceFactory = () => {
   // Create env
-  const env = new EnvService();
-
+  
   // Read environment variables from browser window
   const browserWindow = window || {};
   // const browserWindowEnv = browserWindow['__env'] || {};
@@ -17,11 +15,5 @@ export const EnvServiceFactory = () => {
   //   }
   // }
 
-  return env;
 };
 
-export const EnvServiceProvider = {
-  provide: EnvService,
-  useFactory: EnvServiceFactory,
-  deps: [],
-};
