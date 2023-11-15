@@ -1,0 +1,108 @@
+<div class="card mb-1">
+  <div class="p-1 text-center bg-warning" style="border-radius: 4px 4px 0 0;">
+    <div class="d-flex justify-content-between">
+      <div class="token-No">
+        {{stringToInteger(cardData.KOT.substring(cardData.KOT.length - 5))}}
+      </div>
+      <div class="d-flex flex-column align-items-end">
+        <span>{{cardData.SaleDT | date:'dd-MM-yyyy HH:mm:ss a'}}</span>
+        <span class="line-height-1">{{cardData.Area}} {{cardData.TblNo}}</span>
+      </div>
+    </div>
+    <div class="d-flex text-center flex-column card-header-member-info mt-1">
+      <div>
+
+        <span class="customer-name">{{cardData.MembershipNo}} ({{cardData.CusName}})</span> 
+      </div>
+      <div class="line-height-1">
+        <span>{{cardData.ServiceName}}</span>
+      </div>
+    </div>
+  </div>
+  <div class="pb-0"> 
+
+      <div class="kds-card-content table-responsive">
+        <table class="table">
+          <thead>
+            <th class="w-75">Item</th>
+            <th>Qty</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of cardData.ItemList">
+              <td [ngClass]="{'strike-through':item.Qty=='0' || item.Qty=='0.00'}">{{item.Item}}</td>
+              <td>{{item.Qty}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    <div class="d-flex flex-column align-items-center m-1 gap-1">
+        <button *ngIf="cardType==1" class="btn btn-success w-100" (click)="onChangeStatus(cardData,'PROCESSING')">
+          Start Processing
+        </button>
+        <button *ngIf="cardType==2" class="btn btn-success w-100" (click)="onChangeStatus(cardData,'COMPLETE')">
+          Process Complete
+        </button>
+        <button *ngIf="cardType==3" class="btn btn-success w-100" (click)="onChangeStatus(cardData,'DELIVERED')">
+          Serve
+        </button>
+
+       
+
+      <div class="d-flex gap-3 w-100" *ngIf="cardType==1">
+        <button class="btn btn-warning text-light w-50" (click)="openOrderModifyModal(orderModifyModal,cardData)">Modify</button>
+        <button class="btn btn-danger w-50" (click)="openOrderRejectModal(orderModifyModal,cardData)">Reject</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #orderModifyModal let-modal>
+  
+  <div>
+    <div class="modal-header">
+      <button type="button" class="p-btn" id="orderModifyModalCloseBtn" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <i class="fa fa-close"></i>
+      </button>
+    </div>
+  </div>
+  <div class="row p-3">
+    <div class="col-12" style="overflow-y: scroll; max-height: 750px;">
+      <table class="table">
+        <thead>
+          <th>ItemId</th>
+          <th>Item</th>
+          <th>ItemSl</th>
+          <th>OptionId</th>
+          <th>AddonsId</th>
+          <th>Qty</th>
+          <th>RQty</th>
+          <th>
+            <input [ngClass]='{"hide":isRejectEnabled}' type="checkbox" (change)="setAllFilterColumnList($event)" />
+          </th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of infoList; let i = index">
+            <td>{{item.SalesID}}</td>
+            <td>{{item.ItemName}}</td>
+            <td>{{item.ItemSL}}</td>
+            <td>{{item.OptionsID}}</td>
+            <td>{{item.AddonsID}}</td>
+            <td>{{item.Qty_Text}}</td>
+            <td>{{item.rQty}}</td>
+            <td [ngClass]='{"disabled":item.OptionsID!="","read-only":isRejectEnabled}'>
+              <span>{{item.OptionId}}</span>
+              <input type="checkbox" [checked]="selectedItemList.includes(item)" name="IsChecked{{ i }}"
+                (change)="setFilterColumnList(item,$event)" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="d-flex justify-content-end w-100 pr-3 gap-3 mt-2">
+      <button class="btn btn-warning text-light" (click)="onModifyOrReject()">Update</button>
+      <button class="btn btn-danger " (click)="modal.dismiss('Cross click')">Back</button>
+    </div>
+  </div>
+</ng-template>

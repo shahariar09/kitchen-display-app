@@ -1,0 +1,21 @@
+<section>
+  <div class="card" >
+    <div class="card-header text-center section-card-heder header-color">
+      <h5>Completed</h5>
+    </div>
+    <div class="kds-card-body">
+      <div>
+        <div  class="kds-card-container">
+          <div *ngFor="let item of kotCompleteList">
+  
+            <div class="kds-card" *ngIf="item.KOTStatus=='COMPLETE'">
+              <app-kds-card [cardType]="3" [cardData]="item"></app-kds-card>
+            </div>
+    
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</section>

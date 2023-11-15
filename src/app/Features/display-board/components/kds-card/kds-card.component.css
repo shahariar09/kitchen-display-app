@@ -1,0 +1,48 @@
+
+.token-No{
+    min-width: 42px;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    background: #ffe595;
+    border-radius: 2px;
+}
+.card-header-member-info{
+    background: #ffd966;
+
+}
+tr:last-child{
+    border: transparent;
+}
+th{
+    padding: 8px;
+}
+button{
+    font-weight: 500;
+}
+.kds-card-content{
+    overflow: auto;
+    height: 210px;
+    margin-top: 5px;
+}
+.customer-name{
+    font-size: 14px;
+    display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+}
+button{
+    font-size: 14px !important;
+}
+.line-height-1{
+    line-height: 1;
+    margin-bottom: 4px;
+}
+
+.selected {
+    background-color: yellow;
+  }
+
