@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ConfigService } from './config.service';
 
 @Component({
   selector: 'app-root',
@@ -9,11 +8,7 @@ import { ConfigService } from './config.service';
 export class AppComponent {
   jsonData: any;
   title = 'kitchen-display-app';
-  constructor(private configService: ConfigService) {}
+  constructor() {}
 
-  ngOnInit() {
-    this.configService.getData().subscribe((data) => {
-      this.jsonData = data;
-    });
-  }
+  ngOnInit() {}
 }

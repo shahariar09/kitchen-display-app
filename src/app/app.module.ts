@@ -5,8 +5,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './Features/shared/shared.module';
-import { ConfigService } from './config.service';
 import { HttpClientModule } from '@angular/common/http';
+import {
+  APP_BASE_HREF,
+  HashLocationStrategy,
+  LocationStrategy,
+} from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,11 +21,12 @@ import { HttpClientModule } from '@angular/common/http';
     SharedModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    { provide: APP_BASE_HREF, useValue: '/' },
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {
-  constructor(configService: ConfigService) {
-    configService.getData();
-  }
+  constructor() {}
 }

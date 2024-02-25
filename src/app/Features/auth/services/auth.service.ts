@@ -1,25 +1,22 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ConfigService } from 'src/app/config.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  apiUrl = '';
+  windowObj: any = window;
+  private readonly APIUrl = this.windowObj.__env.apiUrl;
+
   isLoggedIn() {
     throw new Error('Method not implemented.');
   }
 
-  constructor(private httpClient: HttpClient, private config: ConfigService) {
-    config.getData().subscribe((d) => {
-      this.apiUrl = d.api;
-    });
-  }
+  constructor(private httpClient: HttpClient) {}
 
   login(userName: any, pass: any) {
     var data = this.httpClient.get<any>(
-      `${this.apiUrl}Login/CheckChief?ChiefId=${userName}&pass=${pass}`
+      `${this.APIUrl}Login/CheckChief?ChiefId=${userName}&pass=${pass}`
     );
     return data;
   }
