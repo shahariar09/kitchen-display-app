@@ -72,7 +72,7 @@ export class DisplayBoardComponent implements OnInit {
 
 
   getAllOrdersByUserId(){
-    debugger
+    
     
     var login = JSON.parse(localStorage.getItem("kds-Credential") || '{}')
     this.kitchenDisplayService.getAllOrdersByUserId(login.userid).subscribe(
