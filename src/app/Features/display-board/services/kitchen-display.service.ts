@@ -26,6 +26,8 @@ export class KitchenDisplayService {
   }
 
   getAllOrdersByUserId(userId: any) {
+    
+    
     var data = this.httpClient.get<any>(
       `${this.apiUrl}KitchenDisplay/SelectAll?userId=${userId}`
     );

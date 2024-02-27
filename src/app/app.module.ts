@@ -22,6 +22,6 @@ import { HttpClientModule } from '@angular/common/http';
 })
 export class AppModule {
   constructor(configService: ConfigService) {
-    configService.getData();
+    
   }
 }

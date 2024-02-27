@@ -32,8 +32,10 @@ export class DisplayBoardComponent implements OnInit {
    
 
     
+    setTimeout(() => {
+      this.getAllOrdersByUserId()
+    }, 500); 
     
-    this.getAllOrdersByUserId()
     // this.kotList = data;
 
     this.kitchenDisplayService.buttonClick$.subscribe(() => {
@@ -70,6 +72,7 @@ export class DisplayBoardComponent implements OnInit {
 
 
   getAllOrdersByUserId(){
+    debugger
     
     var login = JSON.parse(localStorage.getItem("kds-Credential") || '{}')
     this.kitchenDisplayService.getAllOrdersByUserId(login.userid).subscribe(

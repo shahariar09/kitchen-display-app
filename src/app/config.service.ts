@@ -8,7 +8,9 @@ import { Observable } from 'rxjs';
 export class ConfigService {
   constructor(private http: HttpClient) {}
 
-  getData(): Observable<any> {
-    return this.http.get('assets/config.json');
+   getData(): Observable<any> {
+    debugger
+    var api = this.http.get('assets/config.json');
+    return api;
   }
 }
