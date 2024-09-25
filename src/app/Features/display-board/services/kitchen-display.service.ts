@@ -22,6 +22,10 @@ export class KitchenDisplayService {
     this.buttonClickSubject.next();
   }
 
+  logout(){
+    return this.httpClient.post<any>(this.APIUrl+'Login/LogOut?waiterid=4444',{});
+  }
+
   getAllOrdersByUserId(userId: any) {
     
     

@@ -1,6 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { data } from 'src/app/data';
 import { KitchenDisplayService } from '../../services/kitchen-display.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-display-board',
@@ -22,11 +23,14 @@ export class DisplayBoardComponent implements OnInit {
 
 
   constructor(
-    private kitchenDisplayService:KitchenDisplayService
+    private kitchenDisplayService:KitchenDisplayService,
+    private router:Router
     
   ) {
     this.startApiCallInterval();
    }
+
+   
 
   ngOnInit() {
    
@@ -43,6 +47,22 @@ export class DisplayBoardComponent implements OnInit {
       this.getAllOrdersByUserId()
       // Add any additional logic you want to execute when the button is clicked.
     });
+  }
+
+  onLogOut(){
+    
+    this.kitchenDisplayService.logout().subscribe(
+      (data)=>{
+        debugger
+      console.log(data);
+      localStorage.removeItem('kds-Credential');
+      this.router.navigate(['/']);
+      },
+      (err)=>{
+        console.log(err);
+        
+      }
+    )
   }
 
   @HostListener('document:mousemove', ['$event'])

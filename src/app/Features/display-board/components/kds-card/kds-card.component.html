@@ -29,7 +29,8 @@
           </thead>
           <tbody>
             <tr *ngFor="let item of cardData.ItemList">
-              <td [ngClass]="{'strike-through':item.Qty=='0' || item.Qty=='0.00'}">{{item.Item}}</td>
+              <!-- <td [ngClass]="{'strike-through':item.rQty=='0' || item.Qty=='0.00'}">{{item.Item}}</td> -->
+              <td [ngClass]="{'strike-through':item.rQty>0}">{{item.Item}}</td>
               <td>{{item.Qty}}</td>
             </tr>
           </tbody>
