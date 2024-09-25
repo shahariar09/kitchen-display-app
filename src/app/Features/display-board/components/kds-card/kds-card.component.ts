@@ -193,14 +193,20 @@ onModifyOrReject(){
   this.kitchenDisplayService.updateOrRejectKds(this.saleList).subscribe(
     (data)=>{
       console.log(data);
-      this.alert.success("Successfully Updated");
+      if(!data.ResultState){
+        this.alert.error(data.Error);
+      }
+      else{
+        this.alert.success("Successfully Updated");
+      }
       document.getElementById("orderModifyModalCloseBtn")?.click();
       this.emitButtonClick()
   
     },
     (err)=>{
+      debugger
       console.log(err);
-      this.alert.success(err);
+      this.alert.error(err.Error);
       
     }
   )
